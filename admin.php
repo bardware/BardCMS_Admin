@@ -27,7 +27,7 @@ require_once("data/start_session.php");
 error_reporting(E_ALL);
 @ini_set('display_errors', '1');
 
-require("../variables.inc.php");
+require("variables.inc.php");
 
 $link = mysql_connect($Host, $User, $PWD) or die("Keine Verbindung möglich!");
 mysql_select_db($DB, $link) or die("Auswahl der Datenbank fehlgeschlagen");
