@@ -19,32 +19,15 @@ along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 REQUESTMETHOD: GET
-FILENAME: neu_bild_ftp.php
+FILENAME: order_beitrag_bilder.php
 FILETYPE: INCLUDE
 */
-?>
-<form method="post" action="<?=$GETString;?>" ENCTYPE="multipart/form-data">
-<table border="0">
-<tr>
-<td>Pfad:</td>
-<td><select name="dir" class="klein"><?
-foreach($_SESSION["img_subdirs"] as $imgDir) { ?>
-    <option value="<?=$imgDir;?>"<? if(isset($_GET["dir"])) {
-    if($imgDir==$_GET["dir"]) echo " selected=\"selected\"";
-} ?>><?=$imgDir;?></option>
+
+if(isset($arrBildRang)) { ?>
+<form action="<?=$GETString;?>" method="post">
+<? foreach($arrBildRang as $aBRKey => $aBRVal) { ?>
+<input type="text" value="<?=$aBRVal["rang"];?>" size="5" name="rang[<?=$aBRKey;?>]"/> <?=$aBRVal["datei"];?><br />
 <? } ?>
-</select></td>
-</tr><tr>
-<td>Unterpfad:</td>
-<td><input type="text" name="subdir" class="klein" /></td>
-</tr>
-<? for($Zaehl=1; $Zaehl<=$PictPerPage; $Zaehl++) { ?>
-<tr>
-<td>Datei <?=$Zaehl;?>:</td>
-<td><input type="file" name="datei[]" class="klein" /></td>
-</tr>
-<? } ?>
-</table>
-<input type="hidden" name="randstring" value="<?=$_SESSION["randstring"];?>">
 <input type="submit" />
 </form>
+<? } ?>

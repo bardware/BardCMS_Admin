@@ -1,4 +1,4 @@
-<? //SHOW
+<? //DATA
 /*
 BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
 
@@ -19,32 +19,21 @@ along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 REQUESTMETHOD: GET
-FILENAME: neu_bild_ftp.php
+FILENAME: order_beitrag_bilder.php
 FILETYPE: INCLUDE
 */
+
+$Abfrage="SELECT gb.bid, datei, gbb.rang FROM ged_bilder gb LEFT JOIN
+ged_beitrag_bilder gbb ON gb.bid=gbb.bildid
+WHERE gbb.beitrid=".$_GET["bid"]."
+ORDER BY gbb.rang";
+//echo $Abfrage;
+$erg=mysql_query($Abfrage, $link);
+
+while($row=mysql_fetch_row($erg)) {
+    $arrBildRang[$row[0]]["datei"]=$row[1];
+    $arrBildRang[$row[0]]["rang"]=$row[2];
+}
+
+mysql_free_result($erg);
 ?>
-<form method="post" action="<?=$GETString;?>" ENCTYPE="multipart/form-data">
-<table border="0">
-<tr>
-<td>Pfad:</td>
-<td><select name="dir" class="klein"><?
-foreach($_SESSION["img_subdirs"] as $imgDir) { ?>
-    <option value="<?=$imgDir;?>"<? if(isset($_GET["dir"])) {
-    if($imgDir==$_GET["dir"]) echo " selected=\"selected\"";
-} ?>><?=$imgDir;?></option>
-<? } ?>
-</select></td>
-</tr><tr>
-<td>Unterpfad:</td>
-<td><input type="text" name="subdir" class="klein" /></td>
-</tr>
-<? for($Zaehl=1; $Zaehl<=$PictPerPage; $Zaehl++) { ?>
-<tr>
-<td>Datei <?=$Zaehl;?>:</td>
-<td><input type="file" name="datei[]" class="klein" /></td>
-</tr>
-<? } ?>
-</table>
-<input type="hidden" name="randstring" value="<?=$_SESSION["randstring"];?>">
-<input type="submit" />
-</form>

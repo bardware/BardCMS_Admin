@@ -70,48 +70,6 @@ reset($_SESSION[$GewDir]);
         }
     }
 $_SESSION["lastShown"][$GewDir]=$arrDirKey;
-/*
-if($_SESSION["lastShown"][$GewDir]!=0) {
-    foreach($_SESSION[$GewDir] as $arrDirKey => $arrDirVal) {
-        if($arrDirKey>$_SESSION["lastShown"][$GewDir]) break;
-        $Zaehl++;
-    }
-}
-
-end($_SESSION[$GewDir]);
-if(key($_SESSION[$GewDir])!=$arrDirKey or $arrDirKey==0) {
-
-reset($_SESSION[$GewDir]);
-
-$tmpArr=_array_slice($_SESSION[$GewDir], $Zaehl, $PictPerPage);
-
-foreach($tmpArr as $tmpKey => $tmpVal) {
-?>
-<tr>
-<td colspan="2"><img src="<?=$imgBildURL.$GewDir.$tmpVal;?>" /></td>
-</tr><tr>
-<td><label for="datei_<?=$arrDirKey;?>">Eintragen:</label></td><td><input type="checkbox" name="datei[]" value="<?=$arrDirKey;?>" id="datei_<?=$arrDirKey;?>" /></td>
-</tr><tr>
-<td>Titel:</td><td><input type="text" name="text[<?=$arrDirKey;?>]" class="klein" /></td>
-</tr><tr>
-<td>Volltext:</td><td><textarea name="ftext[<?=$arrDirKey;?>]" wrap="virtual" lines="6" cols="60" class="klein"></textarea></td>
-</tr><tr>
-<td>Album:</td><td><select name="alben[<?=$arrDirKey;?>][]" multiple="multiple" size="5" class="klein">
-<? foreach($Alben as $Album) { ?>
-<option value="<? echo $Album["aid"]; ?>"<? if(isset($_GET["aid"])) {
-    if($Album["aid"]==$_GET["aid"]) echo " selected=\"selected\"";
-} ?>><? echo $Album["album"]; ?></option>
-<? } ?>
-</select></td>
-</tr>
-<?
-$Bildzaehl++;
-if($Bildzaehl==$PictPerPage) break;
-}
-
-$_SESSION["lastShown"][$GewDir]=$tmpKey;
-}
-*/
 ?>
 </table>
 <input type="submit">

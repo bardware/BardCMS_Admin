@@ -1,4 +1,4 @@
-<? //SHOW
+<? //DATA
 /*
 BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
 
@@ -19,32 +19,22 @@ along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 REQUESTMETHOD: GET
-FILENAME: neu_bild_ftp.php
+FILENAME: assoc_thema_beitraege.php
 FILETYPE: INCLUDE
 */
+
+$BID=$_GET["bid"];
+
+$Abfrage="SELECT head from ged_beitraege where bid=".$BID;
+//echo $Abfrage;
+$erg=mysql_query($Abfrage, $link);
+
+$row=mysql_fetch_row($erg);
+
+$Head=$row[0];
+
+mysql_free_result($erg);
+
+require_once("inc/list_themen_beitrag.php");
+
 ?>
-<form method="post" action="<?=$GETString;?>" ENCTYPE="multipart/form-data">
-<table border="0">
-<tr>
-<td>Pfad:</td>
-<td><select name="dir" class="klein"><?
-foreach($_SESSION["img_subdirs"] as $imgDir) { ?>
-    <option value="<?=$imgDir;?>"<? if(isset($_GET["dir"])) {
-    if($imgDir==$_GET["dir"]) echo " selected=\"selected\"";
-} ?>><?=$imgDir;?></option>
-<? } ?>
-</select></td>
-</tr><tr>
-<td>Unterpfad:</td>
-<td><input type="text" name="subdir" class="klein" /></td>
-</tr>
-<? for($Zaehl=1; $Zaehl<=$PictPerPage; $Zaehl++) { ?>
-<tr>
-<td>Datei <?=$Zaehl;?>:</td>
-<td><input type="file" name="datei[]" class="klein" /></td>
-</tr>
-<? } ?>
-</table>
-<input type="hidden" name="randstring" value="<?=$_SESSION["randstring"];?>">
-<input type="submit" />
-</form>

@@ -18,33 +18,17 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD: GET
-FILENAME: neu_bild_ftp.php
+REQUESTMETHOD: POST
+FILENAME: assoc_thema_beitraege.php
 FILETYPE: INCLUDE
 */
 ?>
-<form method="post" action="<?=$GETString;?>" ENCTYPE="multipart/form-data">
 <table border="0">
 <tr>
-<td>Pfad:</td>
-<td><select name="dir" class="klein"><?
-foreach($_SESSION["img_subdirs"] as $imgDir) { ?>
-    <option value="<?=$imgDir;?>"<? if(isset($_GET["dir"])) {
-    if($imgDir==$_GET["dir"]) echo " selected=\"selected\"";
-} ?>><?=$imgDir;?></option>
-<? } ?>
-</select></td>
+<td>Themen:</td>
+<td><? foreach($arrThemenBeitrag as $aTB) echo $aTB."<br />"; ?></td>
 </tr><tr>
-<td>Unterpfad:</td>
-<td><input type="text" name="subdir" class="klein" /></td>
+<td>Überschrift:</td>
+<td><? echo $selBeitrag["head"]; ?></td>
 </tr>
-<? for($Zaehl=1; $Zaehl<=$PictPerPage; $Zaehl++) { ?>
-<tr>
-<td>Datei <?=$Zaehl;?>:</td>
-<td><input type="file" name="datei[]" class="klein" /></td>
-</tr>
-<? } ?>
 </table>
-<input type="hidden" name="randstring" value="<?=$_SESSION["randstring"];?>">
-<input type="submit" />
-</form>
