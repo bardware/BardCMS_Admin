@@ -1,0 +1,33 @@
+body { font-family:arial,sans-serif; font-size:11pt; font-weight:100; }
+th { text-align:left; }
+td { vertical-align:top; }
+
+.fliesstext { text-align:justify; font-size:9pt; }
+
+a:link { text-decoration:underline;}
+a:visited { text-decoration:underline;}
+a:hover { text-decoration:none;}
+
+.menu { text-decoration:underline; color:#d8d0c8; background-color:#00089c; font-family:Arial,sans-serif; font-weight:bold; font-size:10pt; }
+a.menu:link { text-decoration:underline; color:#d8d0c8; background-color:#00089c; font-family:Arial,sans-serif; font-weight:bold; font-size:10pt; }
+a.menu:visited { text-decoration:underline; color:#d8d0c8; background-color:#00089c; font-family:Arial,sans-serif; font-weight:bold; font-size:10pt; }
+a.menu:hover { text-decoration:none; color:#77ff77; background-color:#00089c; font-family:Arial,sans-serif; font-weight:bold; font-size:10pt; }
+
+.gewaehlt { text-decoration:none; color:#77ff77; background-color:#00089c; font-family:Arial,sans-serif; font-weight:bold; font-size:10pt; }
+a.gewaehlt:link { text-decoration:none; color:#77ff77; background-color:#00089c; font-family:Arial,sans-serif; font-weight:bold; font-size:10pt; }
+a.gewaehlt:visited { text-decoration:none; color:#77ff77; background-color:#00089c; font-family:Arial,sans-serif; font-weight:bold; font-size:10pt; }
+a.gewaehlt:hover { text-decoration:none; color:#77ff77; background-color:#00089c; font-family:Arial,sans-serif; font-weight:bold; font-size:10pt; }
+
+.head { text-decoration:none; color:#000000; background-color:#d8d0c8; font-family:Arial,sans-serif; font-weight:bold; font-size:11pt; }
+a.head:link { text-decoration:underline; color:#000000; background-color:#d8d0c8; font-family:Arial,sans-serif; font-weight:bold; font-size:11pt; }
+a.head:visited { text-decoration:underline; color:#000000; background-color:#d8d0c8; font-family:Arial,sans-serif; font-weight:bold; font-size:11pt; }
+a.head:hover { text-decoration:none; color:#000000; background-color:#d8d0c8; font-family:Arial,sans-serif; font-weight:bold; font-size:11pt; }
+
+.b { font-family:Arial,sans-serif; font-size:10pt;font-weight:900; }
+.t { font-family:Arial,sans-serif; font-size:10pt; }
+
+.center-fixed { text-align:center; font-family:"Courier New", Courier, monospace; font-size:10pt;}
+
+.klein { font-size:9pt; }
+
+option, input, textarea { font-family:arial,sans-serif; font-size:9pt; }
