@@ -18,13 +18,16 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: POST
+FILENAME: assoc_beitrag_links_3.php
+FILETYPE: INCLUDE
 */
-?>
-<? foreach($_POST["rang"] as $POSTRangKey => $POSTRangVal) {
-$Abfrage="UPDATE ged_beitrag_links set rang=".$POSTRangVal." where lid=".$POSTRangKey." and bid=".$_GET["bid"];
-mysql_query($Abfrage, $link);
+
+if(isset($_POST["rang"])) {
+    foreach($_POST["rang"] as $POSTRangKey => $POSTRangVal) {
+        $Abfrage="UPDATE ged_beitrag_links set rang=".$POSTRangVal." where lid=".$POSTRangKey." and bid=".$_GET["bid"];
+        mysql_query($Abfrage, $link);
+    }
 }
 
 $Abfrage="select gl.lid, gbl.bid, gl.link, gl.text, gbl.rang from ged_links gl left join
@@ -44,4 +47,4 @@ while($row=mysql_fetch_array($erg)) {
     ++$Zaehl;
 }
 mysql_free_result($erg);
- ?>
+?>

@@ -18,11 +18,11 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: POST
+FILENAME: disassoc_album_bilder_2.php
+FILETYPE: INCLUDE
 */
-?>
-<?
+
 if(isset($_POST["bid"])) {
     foreach($_POST["bid"] as $BID) {
         $Abfrage="DELETE FROM ged_alben_bilder WHERE aid=".$_GET["aid"]." AND bid=".$BID;

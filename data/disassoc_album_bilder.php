@@ -18,11 +18,11 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: GET
+FILENAME: disassoc_album_bilder.php
+FILETYPE: INCLUDE
 */
-?>
-<?
+
 $Abfrage="SELECT gb.bid, gb.text, gb.datei, gb.breite, gb.hoehe from ged_bilder gb
 LEFT JOIN ged_alben_bilder gab on gab.bid=gb.bid
 WHERE gab.aid=".$_GET["aid"];

@@ -1,4 +1,4 @@
-<? //SHOW 
+<? //SHOW
 /*
 BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
 
@@ -18,11 +18,12 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: POST
+FILENAME: neu_bild_ftp_2.php
+FILETYPE: INCLUDE
 */
-?>
-<? if(isset($arrBilder)) {
+
+if(isset($arrBilder)) {
 if(count($arrBilder)>0) { ?>
 <form method="post" action="admin.php<?=$GETString;?>">
 <table border="0">

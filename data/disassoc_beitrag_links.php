@@ -18,11 +18,11 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: GET
+FILENAME: disassoc_beitrag_links.php
+FILETYPE: INCLUDE
 */
-?>
-<?
+
 $Abfrage="select head from ged_beitraege where bid=".$_GET["bid"];
 //echo $Abfrage;
 $erg=mysql_query($Abfrage, $link);

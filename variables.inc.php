@@ -18,8 +18,10 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: GET
+REQUESTMETHOD: POST
+FILENAME: variables.inc.php
+FILETYPE: INCLUDE
 */
 
     $Host="";
@@ -127,6 +129,27 @@ function _array_slice($array, $offset, $limit) {
         }
     }
     return $new_array;
+}
+
+function mkGETString($arrRepl=false /* in $_GET zu ersetzende/hinzuzufügende Key-Val-Paare */) {
+$arrGET =Array();
+$GETString="?";
+
+foreach($_GET as $GETKey => $GETVal) {
+    $arrGET[$GETKey]=$GETVal;
+}
+
+if($arrRepl!==false) {
+    foreach($arrRepl as $arrReplKey => $arrReplVal) {
+        $arrGET[$arrReplKey]=$arrReplVal;
+    }
+}
+
+foreach($arrGET as $arrGETKey => $arrGETVal) {
+    $GETString.=$arrGETKey."=".$arrGETVal."&";
+}
+
+return $GETString;
 }
 
 ?>

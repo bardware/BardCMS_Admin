@@ -1,4 +1,4 @@
-<? //ADMIN
+<?
 /*
 BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
 
@@ -18,8 +18,10 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: GET
+REQUESTMETHOD: POST
+FILENAME: admin.php
+FILETYPE: CALL
 */
 
 require_once("data/start_session.php");
@@ -47,6 +49,7 @@ $arrAct[$arrAct["assoc_bb"]["2"]]["menu"]="assoc_bb";
 $arrAct[$arrAct["assoc_bb"]["2"]]["2"]="assoc_bb3";
 $arrAct[$arrAct[$arrAct["assoc_bb"]["2"]]["2"]]["incFile"]="assoc_beitrag_bilder_3.php";
 $arrAct[$arrAct[$arrAct["assoc_bb"]["2"]]["2"]]["menu"]="assoc_bb";
+$arrAct[$arrAct[$arrAct["assoc_bb"]["2"]]["2"]]["2"]="assoc_bb";
 $arrAct["assoc_bl"]["incFile"]="assoc_beitrag_links.php";
 $arrAct["assoc_bl"]["menu"]="assoc_bl";
 $arrAct["assoc_bl"]["desc"]="Beitrag mit Links verknüpfen";
@@ -110,20 +113,20 @@ $arrAct["neu_thema"]["desc"]="Neues Thema";
 $arrAct["neu_thema"]["2"]="neu_thema2";
 $arrAct[$arrAct["neu_thema"]["2"]]["incFile"]="neu_thema_2.php";
 $arrAct[$arrAct["neu_thema"]["2"]]["menu"]="neu_thema";
-/*
-$arrAct["assoc_tb"]["incFile"]="assoc_thema_beitrag.php";
-$arrAct["assoc_tb"]["menu"]=true;
+
+$arrAct["assoc_tb"]["incFile"]="assoc_thema_beitraege.php";
+$arrAct["assoc_tb"]["menu"]="assoc_tb";
 $arrAct["assoc_tb"]["desc"]="Verknüpfung von Beitrag und Themen bearbeiten";
 $arrAct["assoc_tb"]["2"]="assoc_tb2";
-$arrAct[$arrAct["assoc_tb"]["2"]]["incFile"]="assoc_thema_beitrag_2.php";
-$arrAct[$arrAct["assoc_tb"]["2"]]["menu"]=false;
-$arrAct["assoc_ht"]["incFile"]="assoc_host_thema.php";
-$arrAct["assoc_ht"]["menu"]=true;
+$arrAct[$arrAct["assoc_tb"]["2"]]["incFile"]="assoc_thema_beitraege_2.php";
+$arrAct[$arrAct["assoc_tb"]["2"]]["menu"]="assoc_tb";
+$arrAct["assoc_ht"]["incFile"]="assoc_host_themen.php";
+$arrAct["assoc_ht"]["menu"]="assoc_ht";
 $arrAct["assoc_ht"]["desc"]="Verknüpfung von Thema und Hosts bearbeiten";
 $arrAct["assoc_ht"]["2"]="assoc_ht2";
-$arrAct[$arrAct["assoc_ht"]["2"]]["incFile"]="assoc_host_thema_2.php";
-$arrAct[$arrAct["assoc_ht"]["2"]]["menu"]=false;
-*/
+$arrAct[$arrAct["assoc_ht"]["2"]]["incFile"]="assoc_host_themen_2.php";
+$arrAct[$arrAct["assoc_ht"]["2"]]["menu"]="assoc_ht";
+
 $arrAct["assoc_ab"]["incFile"]="assoc_album_bilder.php";
 $arrAct["assoc_ab"]["menu"]="assoc_ab";
 $arrAct["assoc_ab"]["desc"]="Album mit Bildern verknüpfen";
@@ -174,47 +177,33 @@ $arrAct["neu_bild_dir"]["2"]="neu_bild_dir2";
 $arrAct[$arrAct["neu_bild_dir"]["2"]]["incFile"]="neu_bild_dir_2.php";
 $arrAct[$arrAct["neu_bild_dir"]["2"]]["menu"]="neu_bild_dir";
 $arrAct[$arrAct["neu_bild_dir"]["2"]]["2"]="neu_bild_dir";
-//$arrAct[$arrAct[$arrAct["neu_bild_dir"]["2"]]["2"]]["incFile"]="neu_bild_dir.php";
-//$arrAct[$arrAct[$arrAct["neu_bild_dir"]["2"]]["2"]]["menu"]=false;
 
-/*
-$arrAct["neu_bild_dir"]["incFile"]="neu_bild_dir.php";
-$arrAct["neu_bild_dir"]["menu"]=true;
-$arrAct["neu_bild_dir"]["desc"]="";
-$arrAct["neu_bild_dir"]["2"]="neu_bild_dir2";
-$arrAct[$arrAct["neu_bild_dir"]["2"]]["incFile"]="neu_bild_dir_2.php";
-$arrAct[$arrAct["neu_bild_dir"]["2"]]["menu"]=false;
-$arrAct[$arrAct["neu_bild_dir"]["2"]]["2"]="neu_bild_dir3";
-$arrAct[$arrAct[$arrAct["neu_bild_dir"]["2"]]["2"]]["incFile"]="neu_bild_dir_3.php";
-$arrAct[$arrAct[$arrAct["neu_bild_dir"]["2"]]["2"]]["menu"]=false;
-*/
+$arrAct["order_ht"]["incFile"]="order_host_themen.php";
+$arrAct["order_ht"]["menu"]="order_ht";
+$arrAct["order_ht"]["desc"]="Reihenfolge der Themen des Hosts bearbeiten";
+$arrAct["order_ht"]["2"]="order_ht2";
+$arrAct[$arrAct["order_ht"]["2"]]["incFile"]="order_host_themen_2.php";
+$arrAct[$arrAct["order_ht"]["2"]]["menu"]="order_ht";
 
-$arrAct["order_th"]["incFile"]="order_themen_host.php";
-$arrAct["order_th"]["menu"]="order_th";
-$arrAct["order_th"]["desc"]="Reihenfolge der Themen des Hosts bearbeiten";
-$arrAct["order_th"]["2"]="order_th2";
-$arrAct[$arrAct["order_th"]["2"]]["incFile"]="order_themen_host_2.php";
-$arrAct[$arrAct["order_th"]["2"]]["menu"]="order_th";
+$arrAct["order_tb"]["incFile"]="order_thema_beitraege.php";
+$arrAct["order_tb"]["menu"]="order_tb";
+$arrAct["order_tb"]["desc"]="Reihenfolge der Beiträge des Themas bearbeiten";
+$arrAct["order_tb"]["2"]="order_tb2";
+$arrAct[$arrAct["order_tb"]["2"]]["incFile"]="order_thema_beitraege_2.php";
+$arrAct[$arrAct["order_tb"]["2"]]["menu"]="order_tb";
 
-$arrAct["order_bt"]["incFile"]="order_beitraege_thema.php";
-$arrAct["order_bt"]["menu"]="order_bt";
-$arrAct["order_bt"]["desc"]="Reihenfolge der Beiträge des Themas bearbeiten";
-$arrAct["order_bt"]["2"]="order_bt2";
-$arrAct[$arrAct["order_bt"]["2"]]["incFile"]="order_beitraege_thema_2.php";
-$arrAct[$arrAct["order_bt"]["2"]]["menu"]="order_bt";
+$arrAct["order_bl"]["incFile"]="order_beitrag_links.php";
+$arrAct["order_bl"]["menu"]="order_bl";
+$arrAct["order_bl"]["desc"]="Reihenfolge der Links des Beitrags bearbeiten";
+$arrAct["order_bl"]["2"]="order_bl2";
+$arrAct[$arrAct["order_bl"]["2"]]["incFile"]="order_beitrag_links_2.php";
+$arrAct[$arrAct["order_bl"]["2"]]["menu"]="order_bl";
 
-$arrAct["order_lb"]["incFile"]="order_links_beitrag.php";
-$arrAct["order_lb"]["menu"]="order_lb";
-$arrAct["order_lb"]["desc"]="Reihenfolge der Links des Beitrags bearbeiten";
-$arrAct["order_lb"]["2"]="order_lb2";
-$arrAct[$arrAct["order_lb"]["2"]]["incFile"]="order_links_beitrag_2.php";
-$arrAct[$arrAct["order_lb"]["2"]]["menu"]="order_lb";
-
-$arrAct["order_bb"]["incFile"]="order_bilder_beitrag.php";
+$arrAct["order_bb"]["incFile"]="order_beitrag_bilder.php";
 $arrAct["order_bb"]["menu"]="order_bb";
 $arrAct["order_bb"]["desc"]="Reihenfolge der Bilder des Beitrags bearbeiten";
 $arrAct["order_bb"]["2"]="order_bb2";
-$arrAct[$arrAct["order_bb"]["2"]]["incFile"]="order_bilder_beitrag_2.php";
+$arrAct[$arrAct["order_bb"]["2"]]["incFile"]="order_beitrag_bilder_2.php";
 $arrAct[$arrAct["order_bb"]["2"]]["menu"]="order_bb";
 
 //ksort($arrAct);

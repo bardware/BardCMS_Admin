@@ -1,4 +1,4 @@
-<? //DATA 
+<? //DATA
 /*
 BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
 
@@ -21,17 +21,18 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 REQUESTMETHOD:
 FILENAME:
 */
-?>
-<?
+
 $Abfrage="insert into ged_beitraege (head, beitrag) values(\"".myAddSlashes($_POST["head"])."\", \"".myAddSlashes($_POST["beitrag"])."\")";
 mysql_query($Abfrage, $link);
 
 $BID=mysql_insert_id($link);
 
-foreach($_POST["tid"] as $TID) {
-    $Abfrage="insert into ged_themen_beitraege (bid, tid) values (".$BID.", ".$TID.")";
-    //echo HTML2TXT($Abfrage);
-    $erg=mysql_query($Abfrage, $link);
+if(isset($_POST["tid"])) {
+    foreach($_POST["tid"] as $TID) {
+        $Abfrage="insert into ged_themen_beitraege (bid, tid) values (".$BID.", ".$TID.")";
+        //echo HTML2TXT($Abfrage);
+        $erg=mysql_query($Abfrage, $link);
+    }
 }
 
 require_once("inc/query_selBeitrag.php");

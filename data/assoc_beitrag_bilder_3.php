@@ -18,21 +18,22 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: POST
+FILENAME: assoc_beitrag_bilder_3.php
+FILETYPE: INCLUDE
 */
-?>
-<? 
 
 if(isset($_GET["seite"]))
     $Seite=$_GET["seite"];
 else
     $Seite=1;
 
-foreach($_POST["rang"] as $POSTRangKey => $POSTRangVal) {
-$Abfrage="UPDATE ged_beitrag_bilder set rang=".$POSTRangVal." where bildid=".$POSTRangKey." and beitrid=".$_GET["bid"];
-mysql_query($Abfrage, $link);
-} 
+if(isset($_POST["rang"])) {
+    foreach($_POST["rang"] as $POSTRangKey => $POSTRangVal) {
+        $Abfrage="UPDATE ged_beitrag_bilder set rang=".$POSTRangVal." where bildid=".$POSTRangKey." and beitrid=".$_GET["bid"];
+        mysql_query($Abfrage, $link);
+    }
+}
 
 $Abfrage="select gb.bid, gbb.bildid, gb.datei, gb.breite, gb.hoehe, gbb.rang from ged_bilder gb left join
 ged_beitrag_bilder gbb on gb.bid=gbb.bildid

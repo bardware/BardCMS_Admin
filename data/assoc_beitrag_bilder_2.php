@@ -18,21 +18,22 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: POST
+FILENAME: assoc_beitrag_bilder_2.php
+FILETYPE: INCLUDE
 */
-?>
-<?
 
 if(isset($_GET["seite"]))
     $Seite=$_GET["seite"];
 else
     $Seite=1;
 
-foreach($_POST["bid"] as $bildID) {
-    $Abfrage="insert into ged_beitrag_bilder (beitrid, bildid) values(".$_GET["bid"].", $bildID)";
-//    echo $Abfrage;
-    mysql_query($Abfrage, $link);
+if(isset($_POST["bid"])) {
+    foreach($_POST["bid"] as $bildID) {
+        $Abfrage="insert into ged_beitrag_bilder (beitrid, bildid) values(".$_GET["bid"].", $bildID)";
+        // echo $Abfrage;
+        mysql_query($Abfrage, $link);
+    }
 }
 
 $Abfrage="update ged_beitraege set eintragdatum=now() where bid=".$_GET["bid"];

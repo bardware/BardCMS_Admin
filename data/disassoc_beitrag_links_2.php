@@ -18,11 +18,12 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: POST
+FILENAME: disassoc_beitrag_links_2.php
+FILETYPE: INCLUDE
 */
-?>
-<?
+
+if(isset($_POST["lid"])) {
 foreach($_POST["lid"] as $linkID) {
     $Abfrage="delete from ged_beitrag_links where bid=".$_GET["bid"]. " and lid=$linkID";
 //    echo $Abfrage;
@@ -31,6 +32,7 @@ foreach($_POST["lid"] as $linkID) {
 $Abfrage="update ged_beitraege set eintragdatum=now() where bid=".$_GET["bid"];
 //    echo $Abfrage;
 $erg=mysql_query($Abfrage, $link);
+}
 
 $Abfrage="select gl.lid, gbl.bid, gl.link, gl.text from ged_links gl left join
 ged_beitrag_links gbl on gl.lid=gbl.lid

@@ -18,11 +18,10 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: GET
+FILENAME: assoc_beitrag_bilder.php
+FILETYPE: INCLUDE
 */
-?>
-<?
 
 if(isset($_GET["seite"]))
     $Seite=$_GET["seite"];
@@ -42,20 +41,25 @@ LEFT JOIN ged_alben_bilder gab ON gab.bid = gb.bid AND gab.aid = ".$_GET["aid"].
 LEFT JOIN ged_beitrag_bilder gbb ON gb.bid = gbb.bildid AND gbb.beitrid = ".$_GET["bid"]."
 WHERE gbb.bildid IS NULL and gab.aid=".$_GET["aid"]." and gb.datei like \"".$imgBildURL.$_GET["dir"]."%\"
 ORDER BY gb.bid
-LIMIT ".(($Seite-1)*$PictPerPage).", ".$PictPerPage;
+LIMIT ".(($Seite-1)*$PictPerPage).", ".($PictPerPage+1);
 
 //echo $Abfrage;
 $erg=mysql_query($Abfrage, $link);
 
+$MorePicturesAvailable=false;
+$MorePicturesAvailable=mysql_num_rows($erg)>$PictPerPage;
+
 $Zaehl=0;
-while($row=mysql_fetch_array($erg)) {
+$row=mysql_fetch_array($erg);
+do {
     $arrBild[$Zaehl]["bid"]=$row[0];
     $arrBild[$Zaehl]["text"]=$row[1];
     $arrBild[$Zaehl]["datei"]=$row[2];
     $arrBild[$Zaehl]["breite"]=$row[3];
     $arrBild[$Zaehl]["hoehe"]=$row[4];
     ++$Zaehl;
-}
+} while($Zaehl<$PictPerPage and $row=mysql_fetch_array($erg));
+
 mysql_free_result($erg);
 
 $allowedGETVars["seite"]=true;

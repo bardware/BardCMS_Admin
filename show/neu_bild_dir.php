@@ -1,4 +1,4 @@
-<? //SHOW 
+<? //SHOW
 /*
 BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
 
@@ -18,11 +18,12 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: GET
+FILENAME: neu_bild_dir.php
+FILETYPE: INCLUDE
 */
-?>
-<? if(count($_SESSION[$GewDir])>0) {
+
+if(count($_SESSION[$GewDir])>0) {
 //printf("%s<br>\n", $_SESSION["lastShown"][$GewDir]);  ?>
 <form action="admin.php<?=$GETString;?>" method="post">
 <table border="0">

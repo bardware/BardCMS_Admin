@@ -1,4 +1,4 @@
-<? //SHOW 
+<? //SHOW
 /*
 BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
 
@@ -18,10 +18,11 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: POST
+FILENAME: neu_bild_dir_2.php
+FILETYPE: INCLUDE
 */
-?>
-<? if(count($_SESSION[$GewDir])>0) { ?>
+
+if(count($_SESSION[$GewDir])>0) { ?>
 <a href="admin.php<?=$GETString; ?>">admin.php<?=str_replace("&", "&amp;", $GETString)?></a>
 <? } ?>

@@ -1,4 +1,4 @@
-<? //DATA 
+<? //DATA
 /*
 BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
 
@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 REQUESTMETHOD:
 FILENAME:
 */
-?>
-<?
+
+if(isset($_POST["bid"])) {
 foreach($_POST["bid"] as $BildID) {
     if(isset($_POST["text"][$BildID]))
         $Text=myAddSlashes($_POST["text"][$BildID]);
@@ -44,5 +44,6 @@ foreach($_POST["bid"] as $BildID) {
             mysql_query($Abfrage, $link);
         }
     }
+}
 }
 ?>

@@ -1,4 +1,4 @@
-<? //SHOW 
+<? //SHOW
 /*
 BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
 
@@ -18,11 +18,12 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: GET
+FILENAME: disassoc_album_bilder.php
+FILETYPE: INCLUDE
 */
-?>
-<? if(isset($arrBild)) { ?>
+
+if(isset($arrBild)) { ?>
 <form action="admin.php<?=$GETString;?>" method="post">
 <? foreach($arrBild as $Bild) { ?>
 <input type="checkbox" name="bid[]" value="<? echo $Bild["bid"]; ?>" /><? echo $Bild["datei"]; ?><br />

@@ -18,11 +18,12 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: GET
+FILENAME: assoc_beitrag_bilder.php
+FILETYPE: INCLUDE
 */
-?>
-<? if(isset($arrBild)) { ?>
+
+if(isset($arrBild)) { ?>
 Bilder, die nicht mir Beitrag: <? echo $Head; ?> verknüpft sind:<br />
 <form action="admin.php<?=$GETString;?>" method="post">
 <? foreach($arrBild as $Bild) { ?>
@@ -31,4 +32,28 @@ Bilder, die nicht mir Beitrag: <? echo $Head; ?> verknüpft sind:<br />
 <? } ?>
 <input type="submit" />
 </form>
-<? } ?>
+<div class="center-fixed"><?
+$arrRepl=Array();
+$arrRepl["action"]=$act;
+
+if($Seite>1) {
+    $arrRepl["seite"]=(1);
+    echo "<a href=\"admin.php".mkGETString($arrRepl)."\" title=\"First\"><<</a> "; 
+    $arrRepl["seite"]=($Seite-1);
+    echo "<a href=\"admin.php".mkGETString($arrRepl)."\" title=\"Prev\"><-</a> ";
+} else {
+    echo "&nbsp;&nbsp; &nbsp;&nbsp; ";
+}
+
+if($MorePicturesAvailable) {
+    $arrRepl["seite"]=($Seite+1);
+    echo "<a href=\"admin.php".mkGETString($arrRepl)."\" title=\"Next\">-></a> ";
+    $arrRepl["seite"]="last";
+    echo "<a href=\"admin.php".mkGETString($arrRepl)."\" title=\"Last\">>></a>";
+} else {
+    echo "&nbsp;&nbsp; &nbsp;&nbsp; ";
+}
+?>
+</div><?
+
+} ?>
