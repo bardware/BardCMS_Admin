@@ -1,6 +1,6 @@
 <?
 /*
-BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
+BardCMS (c) 2003, 2004 by Bardware - Programmer@Bardware.de
 
 This file is part of BardCMS.
 
@@ -34,10 +34,17 @@ require("variables.inc.php");
 $link = mysql_connect($Host, $User, $PWD) or die("Keine Verbindung möglich!");
 mysql_select_db($DB, $link) or die("Auswahl der Datenbank fehlgeschlagen");
 
-if(!isset($_GET["action"])) {
+needGETvar("bid");
+needGETvar("tid");
+needGETvar("hid");
+needGETvar("aid");
+needGETvar("dir");
+needGETvar("action");
+
+if(!isset($GETaction)) {
     $act="";
 } else {
-    $act=strtolower($_GET["action"]);
+    $act=strtolower($GETaction);
 }
 
 $arrAct["assoc_bb"]["incFile"]="assoc_beitrag_bilder.php";
@@ -107,6 +114,12 @@ $arrAct["neu_host"]["desc"]="Host hinzufügen";
 $arrAct["neu_host"]["2"]="neu_host2";
 $arrAct[$arrAct["neu_host"]["2"]]["incFile"]="neu_host_2.php";
 $arrAct[$arrAct["neu_host"]["2"]]["menu"]="neu_host";
+$arrAct["assoc_ha"]["incFile"]="assoc_host_alias.php";
+$arrAct["assoc_ha"]["menu"]="assoc_ha";
+$arrAct["assoc_ha"]["desc"]="HostAlias hinzufügen";
+$arrAct["assoc_ha"]["2"]="assoc_ha2";
+$arrAct[$arrAct["assoc_ha"]["2"]]["incFile"]="assoc_host_alias_2.php";
+$arrAct[$arrAct["assoc_ha"]["2"]]["menu"]="assoc_ha";
 $arrAct["neu_thema"]["incFile"]="neu_thema.php";
 $arrAct["neu_thema"]["menu"]="neu_thema";
 $arrAct["neu_thema"]["desc"]="Neues Thema";
@@ -263,7 +276,7 @@ echo "<?xml version=\"1.0\" encoding=\"iso-8859-1\" ?>\n" ?>
 <meta name="ROBOTS" content="index,all,follow" />
 <meta name="revisit-after" content="10 days" />
 <link href="/styles.css" type="text/css" rel="stylesheet" />
-<title>Gedanken2</title>
+<title>BardCMSAdmin V1</title>
 </head>
 <body>
 

@@ -23,27 +23,30 @@ FILENAME: disassoc_beitrag_links.php
 FILETYPE: INCLUDE
 */
 
-$Abfrage="select head from ged_beitraege where bid=".$_GET["bid"];
+$Abfrage="select head from ged_beitraege where bid=".$GETbid;
 //echo $Abfrage;
-$erg=mysql_query($Abfrage, $link);
-$row=mysql_fetch_row($erg);
-$Head=$row[0];
-mysql_free_result($erg);
+if(false!==($erg=mysql_query($Abfrage, $link))) {
+    if(false!==($row=mysql_fetch_row($erg))) {
+        $Head=$row[0];
+        mysql_free_result($erg);
+    }
+}
 
 $Abfrage="select gl.lid, gbl.bid, gl.link, gl.text from ged_links gl left join
 ged_beitrag_links gbl on gl.lid=gbl.lid 
-where gbl.bid=".$_GET["bid"]."
+where gbl.bid=".$GETbid."
 ORDER BY gbl.rang, gbl.lid";
 //echo $Abfrage;
-$erg=mysql_query($Abfrage, $link);
+if(false!==($erg=mysql_query($Abfrage, $link))) {
 
-$Zaehl=0;
-while($row=mysql_fetch_array($erg)) {
-    $arrLink[$Zaehl]["lid"]=$row[0];
-    $arrLink[$Zaehl]["bid"]=$row[1];
-    $arrLink[$Zaehl]["link"]=$row[2];
-    $arrLink[$Zaehl]["text"]=htmlspecialchars($row[3]);
-    ++$Zaehl;
+    $Zaehl=0;
+    while($row=mysql_fetch_array($erg)) {
+        $arrLink[$Zaehl]["lid"]=$row[0];
+        $arrLink[$Zaehl]["bid"]=$row[1];
+        $arrLink[$Zaehl]["link"]=$row[2];
+        $arrLink[$Zaehl]["text"]=htmlspecialchars($row[3]);
+        ++$Zaehl;
+    }
+    mysql_free_result($erg);
 }
-mysql_free_result($erg);
 ?>

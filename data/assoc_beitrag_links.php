@@ -1,6 +1,6 @@
 <? //DATA
 /*
-BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
+BardCMS (c) 2003, 2004 by Bardware - Programmer@Bardware.de
 
 This file is part of BardCMS.
 
@@ -23,26 +23,29 @@ FILENAME: assoc_beitrag_links.php
 FILETYPE: INCLUDE
 */
 
-$Abfrage="select head from ged_beitraege where bid=".$_GET["bid"];
+$Abfrage="select head from ged_beitraege where bid=".$GETbid;
 //echo $Abfrage;
-$erg=mysql_query($Abfrage, $link);
-$row=mysql_fetch_row($erg);
-$Head=$row[0];
-mysql_free_result($erg);
+if(false!==($erg=mysql_query($Abfrage, $link))) {
+    if(false!==($row=mysql_fetch_row($erg))) {
+        $Head=$row[0];
+        mysql_free_result($erg);
+    }
+}
 
 $Abfrage="select l.lid, bl.bid, l.link, l.text from ged_links l 
-left join ged_beitrag_links bl on l.lid=bl.lid and bl.bid=".$_GET["bid"]." 
+left join ged_beitrag_links bl on l.lid=bl.lid and bl.bid=".$GETbid."
 where bl.bid is null";
 //echo $Abfrage;
-$erg=mysql_query($Abfrage, $link);
+if(false!==($erg=mysql_query($Abfrage, $link))) {
 
-$Zaehl=0;
-while($row=mysql_fetch_array($erg)) {
-    $arrLink[$Zaehl]["lid"]=$row[0];
-    $arrLink[$Zaehl]["bid"]=$row[1];
-    $arrLink[$Zaehl]["link"]=$row[2];
-    $arrLink[$Zaehl]["text"]=htmlspecialchars($row[3]);
-    ++$Zaehl;
-}
-mysql_free_result($erg);
+    $Zaehl=0;
+    while($row=mysql_fetch_array($erg)) {
+        $arrLink[$Zaehl]["lid"]=$row[0];
+        $arrLink[$Zaehl]["bid"]=$row[1];
+        $arrLink[$Zaehl]["link"]=$row[2];
+        $arrLink[$Zaehl]["text"]=htmlspecialchars($row[3]);
+        ++$Zaehl;
+    }
+    mysql_free_result($erg);
+}    
 ?>

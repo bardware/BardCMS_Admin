@@ -1,6 +1,6 @@
 <?
 /*
-BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
+BardCMS (c) 2003, 2004 by Bardware - Programmer@Bardware.de
 
 This file is part of BardCMS.
 
@@ -131,7 +131,6 @@ function _array_slice($array, $offset, $limit) {
     return $new_array;
 }
 
-
 function mkGETString($arrRepl=false) {
 $arrGET=Array();
 $GETString="?";
@@ -147,27 +146,21 @@ if($arrRepl!==false) {
 }
 
 foreach($arrGET as $arrGETKey => $arrGETVal) {
-    $GETString.=$arrGETKey."=".$arrGETVal."&";
+    $GETString.=$arrGETKey."=".$arrGETVal."&amp;";
 }
 
 return $GETString;
 }
 
 function needGETVar($idx) {
-
 global ${"GET".$idx};
-
-if(isset($_GET[$idx])) ${"GET".$idx}=$_GET[$idx];
-
+    if(isset($_GET[$idx])) ${"GET".$idx}=$_GET[$idx];
 return;
 }
 
 function needPOSTVar($idx) {
-
 global ${"POST".$idx};
-
-if(isset($_POST[$idx])) ${"POST".$idx}=$_POST[$idx];
-
+    if(isset($_POST[$idx])) ${"POST".$idx}=$_POST[$idx];
 return;
 }
 

@@ -1,4 +1,4 @@
-<? //DATA 
+<? //DATA
 /*
 BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
 
@@ -54,9 +54,9 @@ $erg=mysql_query($Abfrage, $link);
 
 $Zaehl=0;
 while($row=mysql_fetch_row($erg)) {
-    $HostNamen[$Zaehl]["hid"]=$row[0];
-    $HostNamen[$Zaehl]["hostname"]=$row[1];
-    $HostNamen[$Zaehl]["full"]=$row[2];
+    $HostNamen[$row[0]]["hid"]=$row[0];
+    $HostNamen[$row[0]]["hostname"]=$row[1];
+    $HostNamen[$row[0]]["full"]=$row[2];
     ++$Zaehl;
 }
 

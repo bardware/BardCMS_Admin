@@ -18,19 +18,19 @@ You should have received a copy of the GNU General Public License
 along with BardCMS; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: GET
+FILENAME: assoc_ha_0.php
+FILETYPE: INCLUDE
 */
 
-$Abfrage="select gb.bid, gb.head, gb.beitrag from ged_beitraege gb where gb.bid=".$GETbid;
-//echo $Abfrage;
+$arrHostAliases=Array();
+$Abfrage="SELECT haid, hostalias, hid from ged_host_aliases where hid=".$GEThid;
+// echo $Abfrage;
+
 if(false!==($erg=mysql_query($Abfrage, $link))) {
-    if(false!==($row=mysql_fetch_row($erg))) {
-        $BID=$row[0];
-        $HEAD=$row[1];
-        $BEITRAG=$row[2];
-        mysql_free_result($erg);
-        require_once("inc/list_themen_beitrag.php");
+    while($row=mysql_fetch_row($erg)) {
+        $arrHostAliases[$row[0]]=$row[1];
     }
-}
+    mysql_free_result($erg);
+}    
 ?>

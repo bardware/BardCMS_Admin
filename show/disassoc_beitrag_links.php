@@ -1,6 +1,6 @@
 <? //SHOW
 /*
-BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
+BardCMS (c) 2003, 2004 by Bardware - Programmer@Bardware.de
 
 This file is part of BardCMS.
 
@@ -22,10 +22,14 @@ REQUESTMETHOD: GET
 FILENAME: disassoc_beitrag_links.php
 FILETYPE: INCLUDE
 */
-?>
+
+if(isset($arrLink)) { ?>
 <form action="admin.php<?=$GETString;?>" method="post">
 <? foreach($arrLink as $Link) { ?>
 <input type="checkbox" name="lid[]" value="<? echo $Link["lid"]; ?>" title="<? echo $Link["text"]; ?>" /><? echo $Link["link"]; ?><br />
 <? } ?>
 <input type="submit" />
 </form>
+<? } else { ?>
+Keine Links mit gewähltem Beitrag verknüpft
+<? } ?>

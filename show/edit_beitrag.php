@@ -1,6 +1,6 @@
 <? //SHOW
 /*
-BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
+BardCMS (c) 2003, 2004 by Bardware - Programmer@Bardware.de
 
 This file is part of BardCMS.
 
@@ -30,10 +30,10 @@ FILETYPE: INCLUDE
 <td><? require_once("inc/list_themen_beitrag.php"); ?></td>
 </tr><tr>
 <td>Überschrift:</td>
-<td><input type="text" name="head" value="<? echo $HEAD; ?>" /></td>
+<td><input type="text" name="head" value="<?=$HEAD;?>" /></td>
 </tr><tr>
 <td>Beitrag:</td>
-<td><textarea name="beitrag" cols="60" rows="6" wrap="virtual"><? echo $BEITRAG; ?></textarea></td>
+<td><textarea name="beitrag" cols="60" rows="6" wrap="virtual"><?=$BEITRAG;?></textarea></td>
 </tr>
 </table>
 <input type="submit" />

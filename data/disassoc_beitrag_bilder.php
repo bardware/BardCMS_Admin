@@ -1,6 +1,6 @@
 <? //DATA
 /*
-BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
+BardCMS (c) 2003, 2004 by Bardware - Programmer@Bardware.de
 
 This file is part of BardCMS.
 
@@ -23,30 +23,32 @@ FILENAME: disassoc_beitrag_bilder.php
 FILETYPE: INCLUDE
 */
 
-$Abfrage="select head from ged_beitraege where bid=".$_GET["bid"];
+$Abfrage="select head from ged_beitraege where bid=".$GETbid;
 //echo $Abfrage;
-$erg=mysql_query($Abfrage, $link);
-$row=mysql_fetch_row($erg);
-$Head=$row[0];
-
-mysql_free_result($erg);
+if(false!==($erg=mysql_query($Abfrage, $link))) {
+    if(false!==($row=mysql_fetch_row($erg))) {
+        $Head=$row[0];
+        mysql_free_result($erg);
+    }
+}
 
 $Abfrage="select gb.bid, gbb.bildid, gb.datei, gb.breite, gb.hoehe, gb.text from ged_bilder gb left join
 ged_beitrag_bilder gbb on gb.bid=gbb.bildid
-where gbb.beitrid=".$_GET["bid"]."
+where gbb.beitrid=".$GETbid."
 ORDER BY gbb.rang, gbb.bildid";
 //echo $Abfrage;
-$erg=mysql_query($Abfrage, $link);
+if(false!==($erg=mysql_query($Abfrage, $link))) {
 
-$Zaehl=0;
-while($row=mysql_fetch_array($erg)) {
-    $arrBild[$Zaehl]["bid"]=$row[0];
-    $arrBild[$Zaehl]["bildid"]=$row[1];
-    $arrBild[$Zaehl]["datei"]=$row[2];
-    $arrBild[$Zaehl]["breite"]=$row[3];
-    $arrBild[$Zaehl]["hoehe"]=$row[4];
-    $arrBild[$Zaehl]["text"]=$row[5];
-    ++$Zaehl;
+    $Zaehl=0;
+    while($row=mysql_fetch_array($erg)) {
+        $arrBild[$Zaehl]["bid"]=$row[0];
+        $arrBild[$Zaehl]["bildid"]=$row[1];
+        $arrBild[$Zaehl]["datei"]=$row[2];
+        $arrBild[$Zaehl]["breite"]=$row[3];
+        $arrBild[$Zaehl]["hoehe"]=$row[4];
+        $arrBild[$Zaehl]["text"]=$row[5];
+        ++$Zaehl;
+    }
+    mysql_free_result($erg);
 }
-mysql_free_result($erg);
 ?>
