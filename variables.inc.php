@@ -131,8 +131,9 @@ function _array_slice($array, $offset, $limit) {
     return $new_array;
 }
 
-function mkGETString($arrRepl=false /* in $_GET zu ersetzende/hinzuzufügende Key-Val-Paare */) {
-$arrGET =Array();
+
+function mkGETString($arrRepl=false) {
+$arrGET=Array();
 $GETString="?";
 
 foreach($_GET as $GETKey => $GETVal) {
@@ -150,6 +151,24 @@ foreach($arrGET as $arrGETKey => $arrGETVal) {
 }
 
 return $GETString;
+}
+
+function needGETVar($idx) {
+
+global ${"GET".$idx};
+
+if(isset($_GET[$idx])) ${"GET".$idx}=$_GET[$idx];
+
+return;
+}
+
+function needPOSTVar($idx) {
+
+global ${"POST".$idx};
+
+if(isset($_POST[$idx])) ${"POST".$idx}=$_POST[$idx];
+
+return;
 }
 
 ?>
