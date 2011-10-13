@@ -1,22 +1,6 @@
 <?
 /*
-BardCMS (c) 2003, 2004 by Bardware - Programmer@Bardware.de
-
-This file is part of BardCMS.
-
-BardCMS is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-BardCMS is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with BardCMS; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+BardCMS (c) 2003, 2004, 2005, 2006 by Bardware - Programmer@Bardware.de
 
 REQUESTMETHOD: GET
 REQUESTMETHOD: POST
@@ -26,6 +10,7 @@ FILETYPE: INCLUDE
 
     $Host="";
 //  $Host="localhost";
+    $Port=3306;
     $User="";
     $PWD="";
     $DB="";
@@ -38,6 +23,7 @@ FILETYPE: INCLUDE
     $ftp_imgStartDir="";
 
 $PictPerPage=5;
+$TNSize=120;
 
 $ServerName=$_SERVER["SERVER_NAME"];
 
@@ -89,28 +75,32 @@ global $allowedGETVars, $arrGET;
 return true;
 }
 
-function MakeResetKey($min_length = 32, $max_length = 64) {
+function MakeResetKey() {
     $key = '';
 
-    // build range and shuffle range using ASCII table
-    for ($i=0; $i<=255; $i++) {
-        $range[] = chr($i);
-    }
+//    http://de2.php.net/shuffle
+//    Seit PHP 4.2.0 besteht keine Notwendigkeit mehr, den Zufallsgenerator für Zahlen
+//    mit srand() oder mt_srand() zu füttern, das geschieht nun automatisch.
+//    srand((double)microtime()*1000000);
+//    mt_srand((double)microtime()*1000000);
+    
+    $laenge=32;
+    $anzrange=255;
 
-    // shuffle our range 3 times
-    for ($i=0; $i<=3; $i++) {
-        shuffle($range);
+    // build range
+    for($i=0; $i<=$anzrange; $i++) {
+        $range[]=chr($i);
     }
 
     // loop for random number generation
-    for ($i = 0; $i < mt_rand($min_length, $max_length); $i++) {
-        $key .= $range[mt_rand(0, count($range))];
+    for($i=0; $i<$laenge; $i++) {
+        $key.=$range[mt_rand(0, $anzrange)];
     }
 
-    $return = base64_encode($key);
+    $retval = sha1($key);
 
-    if (!empty($return)) {
-       return $return;
+    if(!empty($retval)) {
+        return $retval;
     } else {
        return 0;
     }
@@ -162,6 +152,38 @@ function needPOSTVar($idx) {
 global ${"POST".$idx};
     if(isset($_POST[$idx])) ${"POST".$idx}=$_POST[$idx];
 return;
+}
+
+function needSESSIONVar($idx) {
+	global ${"SESSION".$idx};
+	if(isset($_SESSION[$idx])) ${"SESSION".$idx}=$_SESSION[$idx];
+return;
+}
+
+function GetText($sprache, $seite) {
+global $conn;
+global ${"txt".$seite};
+${"txt".$seite}=array();
+
+	if($stmt=mysqli_prepare($conn, "SELECT var, text FROM ged_texte WHERE sid=? AND seite=?")) {
+	  /* bind parameters for markers */
+	    mysqli_stmt_bind_param($stmt, "is", $sprache, $seite);
+	
+	    /* execute query */
+	    mysqli_stmt_execute($stmt);
+		echo mysqli_stmt_error($stmt);
+		
+		mysqli_stmt_bind_result($stmt, $var, $text);
+	
+	    while(mysqli_stmt_fetch($stmt)) {
+	    	${"txt".$seite}[$var]=$text;
+	    }
+	
+	    /* close statement */
+	    mysqli_stmt_close($stmt);
+	} else {
+		echo mysqli_error($conn);
+	}	
 }
 
 ?>

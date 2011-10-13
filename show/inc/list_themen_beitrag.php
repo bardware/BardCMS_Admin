@@ -1,33 +1,18 @@
-<? //SHOW/INC 
+<?php //SHOW/INC
 /*
-BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
-
-This file is part of BardCMS.
-
-BardCMS is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-BardCMS is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with BardCMS; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+BardCMS (c) 2003, 2004, 2005, 2006, 2009 by Bardware - Programmer@Bardware.de
 
 REQUESTMETHOD:
 FILENAME:
+FILETYPE: INCLUDE
 */
 ?>
-<select name="tid[]" multiple="multiple" size="5">
-<? foreach($Themen as $Thema) { ?>
-<option value="<? echo $Thema["tid"]; ?>"<? if(isset($arrThemenBeitrag)) {
-    if(isset($arrThemenBeitrag[$Thema["tid"]])) echo "selected=\"selected\"";
- } elseif(isset($_GET["tid"])) {
-    if($_GET["tid"]==$Thema["tid"]) echo "selected=\"selected\"";
- } ?>><? echo $Thema["full"]; ?></option>
-<? } ?>
+<select name="tid[]" multiple="multiple" size="5" class="enterdata" id="tid">
+<?php foreach($Themen as $ThemenKey => $ThemenVal) { ?>
+<option value="<?php echo $ThemenKey;?>"<?php if(!empty($arrThemenBeitrag)) {
+	if(isset($arrThemenBeitrag[$ThemenKey])) echo ' selected="selected"';
+ } elseif(!empty($GETtid)) {
+	if($GETtid==$ThemenKey) echo 'selected="selected"';
+ } ?>><?php echo $ThemenVal["full"];?></option>
+<?php } ?>
 </select>

@@ -1,39 +1,34 @@
-<? //DATA 
+<?php //DATA
 /*
-BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
-
-This file is part of BardCMS.
-
-BardCMS is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-BardCMS is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with BardCMS; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+BardCMS (c) 2003, 2004, 2005, 2006, 2009 by Bardware - Programmer@Bardware.de
 
 REQUESTMETHOD:
 FILENAME:
+FILETYPE: INCLUDE
 */
-?>
-<?
-$Abfrage="SELECT gt.tid, thema, gth.rang FROM ged_themen gt LEFT JOIN
-ged_hosts_themen gth ON gt.tid=gth.tid
-WHERE gth.hid=".$_GET["hid"]."
-ORDER BY gth.rang";
-//echo $Abfrage;
-$erg=mysql_query($Abfrage, $link);
 
-while($row=mysql_fetch_row($erg)) {
-    $arrThemaRang[$row[0]]["thema"]=$row[1];
-    $arrThemaRang[$row[0]]["rang"]=$row[2];
+needGETvar("sortdir");
+needGETvar("sorthid");
+needGETvar("sorttid");
+
+if(!empty($GETsortdir) and !empty($GETsorthid) and !empty($GETsorttid)) {
+	require($DATAdir."inc/order_host_themen.php");
 }
 
-mysql_free_result($erg);
+$Abfrage="SELECT gt.tid, thema, gth.rang, gth.hid FROM ged_themen gt LEFT JOIN
+ged_host_themen gth ON gt.tid=gth.tid
+WHERE gth.hid=".$GEThid."
+ORDER BY gth.rang";
+//echo $Abfrage;
+$erg=mysqli_query($conn, $Abfrage);
+
+$arrThemaRang=Array();
+while($row=mysqli_fetch_row($erg)) {
+	$arrThemaRang[$row[0]]["tid"]=$row[0];
+	$arrThemaRang[$row[0]]["thema"]=$row[1];
+	$arrThemaRang[$row[0]]["rang"]=$row[2];
+	$arrThemaRang[$row[0]]["hid"]=$row[3];
+}
+
+mysqli_free_result($erg);
 ?>

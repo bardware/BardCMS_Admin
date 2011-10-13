@@ -1,35 +1,42 @@
-<? //DATA/INC 
+<?php //DATA/INC
 /*
-BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
-
-This file is part of BardCMS.
-
-BardCMS is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-BardCMS is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with BardCMS; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+BardCMS (c) 2003, 2004, 2005, 2006, 2009 by Bardware - Programmer@Bardware.de
 
 REQUESTMETHOD:
 FILENAME:
+FILETYPE: INCLUDE
 */
-?>
-<?
-$Abfrage="delete from ged_themen_beitraege where bid=".$BID;
-//echo HTML2TXT($Abfrage);
-mysql_query($Abfrage, $link);
 
-foreach($_POST["tid"] as $postThema) {
-    $Abfrage="insert into ged_themen_beitraege (bid, tid) values (".$BID.", ".$postThema.")";
-    //echo HTML2TXT($Abfrage);
-    mysql_query($Abfrage, $link);
+if($stmt=mysqli_prepare($conn, "DELETE FROM ged_thema_beitraege WHERE bid=?")) {
+	mysqli_stmt_bind_param($stmt, "i", $BID);
+	mysqli_stmt_execute($stmt);
+	mysqli_stmt_close($stmt);
+} else {
+	echo mysqli_error($conn);
+}
+
+if(!empty($POSTtid)) {
+
+	if($stmt=mysqli_prepare($conn, "SELECT IFNULL(MAX(rang),0)+1 FROM ged_thema_beitraege WHERE tid=?")) {
+		mysqli_stmt_bind_param($stmt, "i", $GETtid);
+		mysqli_stmt_bind_result($stmt, $Zahl);
+		mysqli_stmt_execute($stmt);
+		mysqli_stmt_fetch($stmt);
+		mysqli_stmt_close($stmt);
+	} else {
+		echo mysqli_error($conn);
+	}
+	
+	if($stmt=mysqli_prepare($conn, "INSERT INTO ged_thema_beitraege (bid, tid, rang) VALUES(?, ?, ?)")) {
+		mysqli_stmt_bind_param($stmt, "iii", $BID, $TID, $Zahl);
+		foreach($POSTtid as $TID) {
+			mysqli_stmt_execute($stmt);
+			$Zahl++;
+		}
+		mysqli_stmt_close($stmt);
+	} else {
+		echo mysqli_error($conn);
+	}
+	
 }
 ?>

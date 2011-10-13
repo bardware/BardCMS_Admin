@@ -1,78 +1,77 @@
-<? //DATA
+<?php //DATA
 /*
-BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
+BardCMS (c) 2003, 2004, 2005, 2006, 2009 by Bardware - Programmer@Bardware.de
 
-This file is part of BardCMS.
-
-BardCMS is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-BardCMS is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with BardCMS; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: GET
+REQUESTMETHOD: POST
+FILENAME: menu.php
+FILETYPE: INCLUDE
 */
-?>
-<?
-$Abfrage="select tid, if(length(thema)>$MaxComboLen, concat(left(thema,$MaxComboLen), \"...\"), thema), thema from ged_themen order by thema";
+
+GetText($SESSIONlang, "menu");
+
+$Abfrage="SELECT tid, IF(LENGTH(thema)>$MaxComboLen, CONCAT(LEFT(thema,$MaxComboLen), '...'), thema), thema FROM ged_themen ORDER BY thema";
 //echo $Abfrage;
-$erg=mysql_query($Abfrage, $link);
+$erg=mysqli_query($conn, $Abfrage);
 
-$Zaehl=0;
-while($row=mysql_fetch_row($erg)) {
-    $Themen[$Zaehl]["tid"]=$row[0];
-    $Themen[$Zaehl]["thema"]=$row[1];
-    $Themen[$Zaehl]["full"]=$row[2];
-    ++$Zaehl;
+$Themen=Array();
+while($row=mysqli_fetch_row($erg)) {
+	$Themen[$row[0]]["tid"]=$row[0];
+	$Themen[$row[0]]["thema"]=$row[1];
+	$Themen[$row[0]]["full"]=$row[2];
 }
-mysql_free_result($erg);
+mysqli_free_result($erg);
 
-$Abfrage="select bid, if(length(head)>$MaxComboLen, concat(left(head,$MaxComboLen), \"...\"), head), head from ged_beitraege order by head";
-$erg=mysql_query($Abfrage, $link);
+$Abfrage="SELECT bid, IF(LENGTH(head)>$MaxComboLen, CONCAT(LEFT(head,$MaxComboLen), '...'), head), head FROM ged_beitraege ORDER BY head";
+$erg=mysqli_query($conn, $Abfrage);
 
-$Zaehl=0;
-while($row=mysql_fetch_row($erg)) {
-    $Beitraege[$Zaehl]["bid"]=$row[0];
-    $Beitraege[$Zaehl]["beitrag"]=$row[1];
-    $Beitraege[$Zaehl]["full"]=$row[2];
-    ++$Zaehl;
+$Beitraege=Array();
+while($row=mysqli_fetch_row($erg)) {
+	$Beitraege[$row[0]]["bid"]=$row[0];
+	$Beitraege[$row[0]]["beitrag"]=$row[1];
+	$Beitraege[$row[0]]["full"]=$row[2];
 }
 
-mysql_free_result($erg);
+mysqli_free_result($erg);
 
-$Abfrage="select hid, if(length(hostname)>$MaxComboLen, concat(left(hostname,$MaxComboLen), \"...\"), hostname), hostname from ged_hosts order by hostname";
-$erg=mysql_query($Abfrage, $link);
+$Abfrage="SELECT hid, IF(LENGTH(hostname)>$MaxComboLen, CONCAT(LEFT(hostname,$MaxComboLen), '...'), hostname), hostname FROM ged_hosts ORDER BY hostname";
+$erg=mysqli_query($conn, $Abfrage);
 
-$Zaehl=0;
-while($row=mysql_fetch_row($erg)) {
-    $HostNamen[$row[0]]["hid"]=$row[0];
-    $HostNamen[$row[0]]["hostname"]=$row[1];
-    $HostNamen[$row[0]]["full"]=$row[2];
-    ++$Zaehl;
+$HostNamen=Array();
+while($row=mysqli_fetch_row($erg)) {
+	$HostNamen[$row[0]]["hid"]=$row[0];
+	$HostNamen[$row[0]]["hostname"]=$row[1];
+	$HostNamen[$row[0]]["full"]=$row[2];
 }
 
-mysql_free_result($erg);
+mysqli_free_result($erg);
 
-$Abfrage="select aid, if(length(album)>$MaxComboLen, concat(left(album,$MaxComboLen), \"...\"), album), album from ged_alben order by album";
+$Abfrage="SELECT aid, IF(LENGTH(album)>$MaxComboLen, CONCAT(LEFT(album,$MaxComboLen), '...'), album), album FROM ged_alben ORDER BY album";
 //echo $Abfrage;
-$erg=mysql_query($Abfrage, $link);
+$erg=mysqli_query($conn, $Abfrage);
 
-$Zaehl=0;
-while($row=mysql_fetch_row($erg)) {
-    $Alben[$Zaehl]["aid"]=$row[0];
-    $Alben[$Zaehl]["album"]=$row[1];
-    $Alben[$Zaehl]["full"]=$row[2];
-    ++$Zaehl;
+$Alben=Array();
+while($row=mysqli_fetch_row($erg)) {
+	$Alben[$row[0]]["aid"]=$row[0];
+	$Alben[$row[0]]["album"]=$row[1];
+	$Alben[$row[0]]["full"]=$row[2];
 }
-mysql_free_result($erg);
+mysqli_free_result($erg);
+
+if($stmt=mysqli_prepare($conn, "SELECT aid, link FROM ged_actions ORDER BY nutzung DESC, beschreibung ASC")) {
+	mysqli_stmt_execute($stmt);
+	echo mysqli_stmt_error($stmt);
+	mysqli_stmt_bind_result($stmt, $aid, $tmpLink);
+
+	$Actions=Array();
+	while(mysqli_stmt_fetch($stmt)) {
+		$Actions[$aid]["aid"]=$aid;
+		$Actions[$aid]["link"]=$tmpLink;
+	}
+
+	mysqli_stmt_close($stmt);
+} else {
+	echo mysqli_error($conn);
+}
 
 ?>

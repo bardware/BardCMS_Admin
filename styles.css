@@ -1,33 +1,50 @@
-body { font-family:arial,sans-serif; font-size:11pt; font-weight:100; }
-th { text-align:left; }
-td { vertical-align:top; }
+body { color:#000000; background-color:#ffffff; font-family:arial,sans-serif; font-size:100.01%}
 
-.fliesstext { text-align:justify; font-size:9pt; }
+.fliesstext { text-align:justify; font-size:0.8em; line-height:1.5em}
 
-a:link { text-decoration:underline;}
-a:visited { text-decoration:underline;}
-a:hover { text-decoration:none;}
+#cont { position:relative; top:0px; left:0px; float:none; width:70%; margin-left:22em; margin-right:0px; margin-bottom:10px; margin-top:0px; padding-left:10px; padding-right:0px; padding-bottom:0px; padding-top:0px; display:block;}
+#mnu { position:absolute; top:10px; left:10px; float: none; overflow: hidden; z-index:3; width:30em; overflow:auto;}
 
-.menu { text-decoration:underline; color:#d8d0c8; background-color:#00089c; font-family:Arial,sans-serif; font-weight:bold; font-size:10pt; }
-a.menu:link { text-decoration:underline; color:#d8d0c8; background-color:#00089c; font-family:Arial,sans-serif; font-weight:bold; font-size:10pt; }
-a.menu:visited { text-decoration:underline; color:#d8d0c8; background-color:#00089c; font-family:Arial,sans-serif; font-weight:bold; font-size:10pt; }
-a.menu:hover { text-decoration:none; color:#77ff77; background-color:#00089c; font-family:Arial,sans-serif; font-weight:bold; font-size:10pt; }
+.klein { font-size:0.6em; }
 
-.gewaehlt { text-decoration:none; color:#77ff77; background-color:#00089c; font-family:Arial,sans-serif; font-weight:bold; font-size:10pt; }
-a.gewaehlt:link { text-decoration:none; color:#77ff77; background-color:#00089c; font-family:Arial,sans-serif; font-weight:bold; font-size:10pt; }
-a.gewaehlt:visited { text-decoration:none; color:#77ff77; background-color:#00089c; font-family:Arial,sans-serif; font-weight:bold; font-size:10pt; }
-a.gewaehlt:hover { text-decoration:none; color:#77ff77; background-color:#00089c; font-family:Arial,sans-serif; font-weight:bold; font-size:10pt; }
+input, textarea, select { font-family:arial,sans-serif; font-size:1em; border:1px solid black; }
+option { font-family:arial,sans-serif; font-size:1em; width:28em; }
 
-.head { text-decoration:none; color:#000000; background-color:#d8d0c8; font-family:Arial,sans-serif; font-weight:bold; font-size:11pt; }
-a.head:link { text-decoration:underline; color:#000000; background-color:#d8d0c8; font-family:Arial,sans-serif; font-weight:bold; font-size:11pt; }
-a.head:visited { text-decoration:underline; color:#000000; background-color:#d8d0c8; font-family:Arial,sans-serif; font-weight:bold; font-size:11pt; }
-a.head:hover { text-decoration:none; color:#000000; background-color:#d8d0c8; font-family:Arial,sans-serif; font-weight:bold; font-size:11pt; }
+form label {
+	display: block;
+	float: left;
+	width: 8em;
+	vertical-align: top;
+	clear: both;
+}
 
-.b { font-family:Arial,sans-serif; font-size:10pt;font-weight:900; }
-.t { font-family:Arial,sans-serif; font-size:10pt; }
+.enterdata {
+	margin-bottom: 2px;
+	width: 30em;
+	display: block;
+	float: right;
+}
 
-.center-fixed { text-align:center; font-family:"Courier New", Courier, monospace; font-size:10pt;}
+.enterbutton {
+	margin-bottom: 2px;
+	width: 8em;
+	display: block;
+	float: right;
+	clear: both;
+}
 
-.klein { font-size:9pt; }
+br {
+	clear: left;
+}
 
-option, input, textarea { font-family:arial,sans-serif; font-size:9pt; }
+form + * {
+	clear: left;
+}
+
+div.formblock {
+	display: block;
+	width: 38.5em;
+}
+
+div.listitem { padding: 0px 2px 0px 2px; cursor: pointer; }
+div:hover.listitem { background-color: #ff00ff; }

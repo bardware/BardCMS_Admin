@@ -1,42 +1,25 @@
-<? //DATA
+<?php //DATA
 /*
-BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
+BardCMS (c) 2003, 2004, 2005, 2006, 2009 by Bardware - Programmer@Bardware.de
 
-This file is part of BardCMS.
-
-BardCMS is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-BardCMS is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with BardCMS; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-REQUESTMETHOD: GET
-FILENAME: disassoc_album_bilder.php
+REQUESTMETHOD:
+FILENAME:
 FILETYPE: INCLUDE
 */
 
 $Abfrage="SELECT gb.bid, gb.text, gb.datei, gb.breite, gb.hoehe from ged_bilder gb
 LEFT JOIN ged_alben_bilder gab on gab.bid=gb.bid
-WHERE gab.aid=".$_GET["aid"];
+WHERE gab.aid=".$GETaid;
 //echo $Abfrage;
-$erg=mysql_query($Abfrage, $link);
+$erg=mysqli_query($conn, $Abfrage);
 
-$Zaehl=0;
-while($row=mysql_fetch_array($erg)) {
-    $arrBild[$Zaehl]["bid"]=$row[0];
-    $arrBild[$Zaehl]["text"]=$row[1];
-    $arrBild[$Zaehl]["datei"]=$row[2];
-    $arrBild[$Zaehl]["breite"]=$row[3];
-    $arrBild[$Zaehl]["hoehe"]=$row[4];
-    ++$Zaehl;
+$arrBild=Array();
+while($row=mysqli_fetch_row($erg)) {
+	$arrBild[$row[0]]["bid"]=$row[0];
+	$arrBild[$row[0]]["text"]=$row[1];
+	$arrBild[$row[0]]["datei"]=$row[2];
+	$arrBild[$row[0]]["breite"]=$row[3];
+	$arrBild[$row[0]]["hoehe"]=$row[4];
 }
-mysql_free_result($erg);
+mysqli_free_result($erg);
 ?>

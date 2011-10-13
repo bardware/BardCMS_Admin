@@ -1,104 +1,59 @@
-<? //SHOW 
+<?php //SHOW
 /*
-BardCMS (c) 2003 by Bardware - Programmer@Bardware.de
+BardCMS (c) 2003, 2004, 2005, 2006, 2009 by Bardware - Programmer@Bardware.de
 
-This file is part of BardCMS.
-
-BardCMS is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-BardCMS is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with BardCMS; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-REQUESTMETHOD:
-FILENAME:
+REQUESTMETHOD: POST
+REQUESTMETHOD: GET
+FILENAME: menu.php
 */
 ?>
 <form action="admin.php" method="get">
-<span class="klein">Beiträge:</span><br />
-<select name="bid" class="klein">
-<? foreach($Beitraege as $Beitrag) { ?>
-<option value="<? echo $Beitrag["bid"]; ?>"<? if(isset($_GET["bid"])) {
-    if($Beitrag["bid"]==$_GET["bid"]) echo " selected=\"selected\"";
-} ?>><? echo $Beitrag["beitrag"]; ?></option>
-<? } ?>
+<span><?php echo $txtmenu["beitr"];?>:</span><br />
+<select name="bid" style="width:28em;">
+<?php foreach($Beitraege as $BeitraegeKey => $BeitraegeVal) { ?>
+<option value="<?php echo $BeitraegeKey;?>"<?php if($BeitraegeKey==$GETbid) echo ' selected="selected"';?>><?php echo $BeitraegeVal["beitrag"];?></option>
+<?php } ?>
 </select><br />
-<span class="klein">Themen:</span><br />
-<select name="tid" class="klein">
-<? foreach($Themen as $Thema) { ?>
-<option value="<? echo $Thema["tid"]; ?>"<? if(isset($_GET["tid"])) {
-    if($Thema["tid"]==$_GET["tid"]) echo " selected=\"selected\"";
-} ?>><? echo $Thema["thema"]; ?></option>
-<? } ?>
+<span><?php echo $txtmenu["themen"];?>:</span><br />
+<select name="tid" style="width:28em;">
+<?php foreach($Themen as $ThemenKey => $ThemenVal) { ?>
+<option value="<?php echo $ThemenKey;?>"<?php if($ThemenKey==$GETtid) echo ' selected="selected"';?>><?php echo $ThemenVal["thema"];?></option>
+<?php } ?>
 </select><br />
-<span class="klein">Hosts:</span><br />
-<select name="hid" class="klein">
-<? foreach($HostNamen as $HostName) { ?>
-<option value="<? echo $HostName["hid"]; ?>"<? if(isset($_GET["hid"])) {
-    if($HostName["hid"]==$_GET["hid"]) echo " selected=\"selected\"";
-} ?>><? echo $HostName["hostname"]; ?></option>
-<? } ?>
+<span>Hosts:</span><br />
+<select name="hid" style="width:28em;">
+<?php foreach($HostNamen as $HostNamenKey => $HostNamenVal) { ?>
+<option value="<?php echo $HostNamenKey;?>"<?php if($HostNamenKey==$GEThid) echo ' selected="selected"';?>><?php echo $HostNamenVal["hostname"];?></option>
+<?php } ?>
 </select><br />
-<span class="klein">Bilderalben:</span><br />
-<select name="aid" class="klein">
-<? foreach($Alben as $Album) { ?>
-<option value="<? echo $Album["aid"]; ?>"<? if(isset($_GET["aid"])) {
-    if($Album["aid"]==$_GET["aid"]) echo " selected=\"selected\"";
-} ?>><? echo $Album["album"]; ?></option>
-<? } ?>
+<span>Bilderalben:</span><br />
+<select name="aid" style="width:28em;">
+<?php foreach($Alben as $AlbenKey => $AlbenVal) { ?>
+<option value="<?php echo $AlbenKey;?>"<?php if($AlbenKey==$GETaid) echo ' selected="selected"';?>><?php echo $AlbenVal["album"];?></option>
+<?php } ?>
 </select><br />
 
-<? /* ?>
-<span class="klein">Bildpfade:</span><br />
-<select name="dir" class="klein"><?
-foreach($arrimgDirs as $imgDir) { ?>
-    <option value="<?=$imgDir;?>"<? if(isset($_GET["dir"])) {
-    if($imgDir==$_GET["dir"]) echo " selected=\"selected\"";
-} ?>><?=$imgDir;?></option>
-<? } ?>
-</select><br />
-<? */ ?>
-<span class="klein">Bildpfade:</span><br />
-<select name="dir" class="klein"><?
+<span>Bildpfade:</span><br />
+<select name="dir" style="width:20em;"><?php 
 foreach($_SESSION["img_subdirs"] as $imgDir) { ?>
-    <option value="<?=$imgDir;?>"<? if(isset($_GET["dir"])) {
-    if($imgDir==$_GET["dir"]) echo " selected=\"selected\"";
-} ?>><?=$imgDir;?></option>
-<? } ?>
+<option value="/<?php echo $imgDir;?>"<?php if("/".$imgDir."/"==$GETdir) echo ' selected="selected"';?>>/<?php echo $imgDir;?></option>
+<?php } ?>
+</select>
+<select name="anz" style="width:7.7em;"><?php 
+for($zaehl=0; $zaehl<=10; $zaehl++) { ?>
+<option style="width:7em;" value="<?php echo $zaehl;?>"<?php if($zaehl==$PictPerPage) echo ' selected="selected"';?>><?php echo $zaehl;?></option>
+<?php } ?>
 </select><br />
 
-<? /* ?>
-<? foreach($arrAct as $ActKey => $ActValue) {
-   if($ActValue["menu"]) { ?>
-<input type="radio" name="action" value="<?=$ActKey;?>" id="<?=$ActKey;?>"<?
-if(isset($_GET["action"])) {
-    if($_GET["action"]==$ActKey or $_GET["action"]==$ActValue["2"]) echo " checked=\"checked\"";
-} ?> /><label for="<?=$ActKey;?>" class="klein"><?=$ActValue["desc"];?></label><br /><?="\n";?><?
-    }
-} ?>
-<? */ ?>
-<span class="klein">Action:</span><br />
-<select name="action" class="klein">
-<? foreach($arrAct as $ActKey => $ActValue) {
-$ActionSelected=($arrAct[$_GET["action"]]["menu"]==$ActKey);
-   if($ActValue["menu"]==$ActKey) { ?>
-<option value="<?=$ActKey;?>"<?
-if(isset($_GET["action"])) {
-    if($ActionSelected) echo " selected=\"selected\"";
-} ?>><?=$ActValue["desc"];?></option>
-<?  }
-} ?>
-</select>
-<? if(""!=(session_id())) { ?>
-<input type="hidden" name="<?=session_name();?>" value="<?=session_id();?>" />
-<? } ?>
+<span>Action:</span><br />
+<select name="action" style="width:28em;">
+<?php foreach($Actions as $ActionsKey => $ActionsVal) { ?>
+<option value="<?php echo $ActionsKey;?>"<?php echo IIF($ActionsKey==$arrGETaction[0], ' selected="selected"', '');?>><?php echo $txtmenu[$ActionsVal["link"]];?></option>
+<?php } ?>
+</select><br />
+
+<?php if(""!=(session_id())) { ?>
+<input type="hidden" name="<?php echo session_name();?>" value="<?php echo session_id();?>" />
+<?php } ?>
 <input type="submit" />
 </form>
