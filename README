@@ -1,0 +1,2 @@
+I developed this software quite some time ago. I repeatedly branched and kept developing in the branches.
+I now merged the latest branch and used `git cvsimport` to export it from sourceforge.net.
